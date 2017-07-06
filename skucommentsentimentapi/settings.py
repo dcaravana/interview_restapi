@@ -128,3 +128,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+WATSON_USERNAME = os.getenv('WATSON_USERNAME')
+WATSON_PASSWORD = os.getenv('WATSON_PASSWORD')
+
+# for local dev
+try:
+    from local_settings import *
+except ImportError:
+    pass

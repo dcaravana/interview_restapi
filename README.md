@@ -25,6 +25,7 @@ I would also like client examples of it working. Acceptable languages for the te
 
 ## Test Execution
 
+- interesting opportunity to study python a bit more
 - actually use python conventions
 - python 2 vs 3
 - packaging
@@ -46,3 +47,20 @@ Created an API in no time.
 For now it's just `/comments` but it may be also `/sku/XXX/commments`.
 
 Documentation is cool TODO complete endpoints descriptions http://www.django-rest-framework.org/topics/documenting-your-api/
+
+API clients automatically generated for some languages http://www.django-rest-framework.org/topics/api-clients/
+
+Learned that ViewSet are just like Controllers in MVC so the right place
+were to implement initial non-scalable call to sentiment analysis. See 
+http://www.django-rest-framework.org/api-guide/viewsets/
+
+After resurrecting my IBM account, I can use the tone service again with
+the Watson SDK for python https://github.com/watson-developer-cloud/python-sdk
+
+Used ENV vars and `local_settings.py` to set credentials (first can be useful
+  in e.g. AWS Beanstalk).
+
+After a bit of wandering around, I've found an ideal way to add behaviour to
+models through signals (`pre_save` in this case), which is great so there is 
+no need to alter the default View and to keep the logic together with the
+corresponding model (in this case `Comment` and the call to tone analyser).
