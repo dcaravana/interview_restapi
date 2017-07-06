@@ -23,6 +23,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
+from rest_framework.documentation import include_docs_urls
 from sku import views
 
 
@@ -37,5 +38,6 @@ router.register(r'comments', views.CommentViewSet)
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^admin/', admin.site.urls),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^docs/', include_docs_urls(title='SKU Comments Sentiment API docs'))    
 ]

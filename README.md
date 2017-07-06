@@ -44,3 +44,5 @@ Just followed
 Created an API in no time.
 
 For now it's just `/comments` but it may be also `/sku/XXX/commments`.
+
+Documentation is cool TODO complete endpoints descriptions http://www.django-rest-framework.org/topics/documenting-your-api/
