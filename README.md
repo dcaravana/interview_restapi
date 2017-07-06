@@ -29,6 +29,18 @@ I would also like client examples of it working. Acceptable languages for the te
 - python 2 vs 3
 - packaging
 - virtualenv
-- REST framework: django, flask, ???
+- framework: django, flask, ???
 - local (dev) mode
 - scalable mode: AWS, database, SQS
+- trying djangorestframework
+
+### djangorestframework
+
+Just followed
+
+- https://github.com/encode/django-rest-framework#example
+- http://www.django-rest-framework.org/tutorial/quickstart/
+
+Created an API in no time.
+
+For now it's just `/comments` but it may be also `/sku/XXX/commments`.
