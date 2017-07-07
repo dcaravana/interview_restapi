@@ -64,3 +64,7 @@ After a bit of wandering around, I've found an ideal way to add behaviour to
 models through signals (`pre_save` in this case), which is great so there is 
 no need to alter the default View and to keep the logic together with the
 corresponding model (in this case `Comment` and the call to tone analyser).
+
+Adding tests as of here http://www.django-rest-framework.org/api-guide/testing/
+Created tests for models and API.
+TODO complete.
