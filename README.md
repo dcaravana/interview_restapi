@@ -53,7 +53,8 @@ Created an API in no time.
 For now it's just `/comments` but it may be also `/sku/XXX/commments`.
 
 It returns a single meaningful result as requested `tone_is_positive`.
-Also returns the entire analysis result for completeness, but it's probably
+The selection of "positiveness" is a bit arbitrary.
+Also stores and returns the entire analysis result for completeness, but it's probably
 something to be treated as an internal because it discloses a detail of the
 underlaying tools which may make upgrades/evolution more difficult as users
 will start to rely on it.
@@ -124,3 +125,9 @@ https://grafana.com/ just mirroring counters coming out from CloudWatch.
 The experience is entirely different since you can group together all the 
 counters that matter to your app/role, enabling easy and quick discovery of issues
 and/or adding an information radiator to your organisation/team.
+
+Logging: diango supports logging (I've added an example call) with full
+configurability https://docs.djangoproject.com/en/1.11/topics/logging/.
+An very useful option here is configuring it to send the logs in a central
+location like AWS CloudWatch, as it makes very simple and immediate to search
+for anything in logs coming from a potentially high number of machines.
