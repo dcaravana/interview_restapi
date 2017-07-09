@@ -50,7 +50,11 @@ Just followed
 
 Created an API in no time.
 
+TODO instructions to install/run `./bootstrap.sh`.
+
 For now it's just `/comments` but it may be also `/sku/XXX/commments`.
+I have enabled authentication which is clearly out of spec but makes things
+a bit more realistic.
 
 It returns a single meaningful result as requested `tone_is_positive`.
 The selection of "positiveness" is a bit arbitrary.
@@ -60,8 +64,6 @@ underlaying tools which may make upgrades/evolution more difficult as users
 will start to rely on it.
 
 Documentation is cool TODO complete endpoints descriptions http://www.django-rest-framework.org/topics/documenting-your-api/
-
-API clients automatically generated for some languages http://www.django-rest-framework.org/topics/api-clients/
 
 Learned that ViewSet are just like Controllers in MVC so the right place
 were to implement initial non-scalable call to sentiment analysis. See 
@@ -105,11 +107,15 @@ would probably do well.
     Clearly having the service call our API back would be awesome, but lacking that,
     we can think to a traditional queue paradigm (implemented using `rq` or 
     AWS SQS), or even better a serverless solution which is much easier to
-    implement on e.g. AWS Lambda service. (TODO code)
+    implement on e.g. AWS Lambda service. To complete the loop, this decoupled
+    element of the architecture should call back the API when done to update
+    the `tone` field of the corresponding SKU. This makes a things a bit more
+    complicated when developing as the API dev environment should be reachable
+    through the Internet if local. (TODO code)
     
-So basically every tier of the solution can scale and be scaled independently
-while the API usage grows, which translates in simplicity and effectiveness of
-a product that can grow with the business.
+So basically every tier of the solution can scale and be tuned for scalability
+independently from each other while the API usage grows. This translates in 
+simplicity and effectiveness of a product that can grow with the business.
 Another completely different take would have implied using AWS API Gateway + Lamdba.
 
 CI: leverage github and related services? not done yet, but started with CI in
@@ -131,3 +137,17 @@ configurability https://docs.djangoproject.com/en/1.11/topics/logging/.
 An very useful option here is configuring it to send the logs in a central
 location like AWS CloudWatch, as it makes very simple and immediate to search
 for anything in logs coming from a potentially high number of machines.
+
+
+I firmly think that clients for major languages should be automatically
+generated.
+Clients for some languagues are immediately available thanks to 
+http://www.coreapi.org/.
+See http://www.django-rest-framework.org/topics/api-clients/.
+See /clients folder.
+Python and Javascript clients are trivial with coreapi.
+Trivial CORS issue with the browser resolved by installing an extension.
+Run it with e.g. `python -m SimpleHTTPServer 8001`.
+node.js coreapi sadly not working right now.
+TODO add Swagger support https://django-rest-swagger.readthedocs.io/en/latest/
+TODO write one client manually.

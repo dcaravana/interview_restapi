@@ -1,0 +1,14 @@
+{
+  "name": "coreapi_sku_comment_tone_client_js",
+  "version": "0.0.1",
+  "description": "CoreAPI SKU Comment Tone API client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Diego Caravana",
+  "license": "ISC",
+  "dependencies": {
+    "coreapi": "^0.1.0"
+  }
+}

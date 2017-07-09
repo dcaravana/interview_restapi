@@ -1,0 +1,73 @@
+<html>
+<head>
+  <title>CoreAPI SKU Comment Tone API browser client</title>
+</head>
+<body>
+  
+<!--
+
+Run this with: python -m SimpleHTTPServer 8001
+
+-->
+<script src="http://127.0.0.1:8000/static/rest_framework/js/coreapi-0.1.0.js"></script>
+<script src="http://127.0.0.1:8000/docs/schema.js"></script>
+
+<script>
+
+const coreapi = window.coreapi
+const schema = window.schema
+
+// you don't want to use this kind of auth in code
+let auth = new coreapi.auth.BasicAuthentication({
+  username: 'admin',
+  password: 'admin001'
+})
+let client = new coreapi.Client({auth: auth})
+// console.log(coreapi, schema)
+
+// http://guid.us/GUID/JavaScript
+function uuid() {
+  function S4() {
+      return (((1+Math.random())*0x10000)|0).toString(16).substring(1); 
+  }  
+  return (S4() + S4() + "-" + S4() + "-4" + S4().substr(0,3) + "-" + S4() + "-" + S4() + S4() + S4()).toLowerCase();  
+}
+
+
+// === horrible callback nesting ahead ===
+
+// users list
+client.action(schema, ['users', 'list']).then(users => {
+  console.log('users', users.length)
+  users.map(user => console.log(user['username']))
+
+  // comment create
+  let new_sku = uuid()
+  console.log("creating", new_sku)
+  client.action(schema, ['comments', 'create'], {
+    sku: new_sku,
+    content: 'This is an incredibly positive message!'
+  }).then(comment => {
+    console.log('new comment', comment)
+
+    // comments list
+    client.action(schema, ['comments', 'list']).then(comments => {
+      console.log('comments', comments.length)
+      comments.map(comment => console.log(comment['sku'], comment['content'], 
+        comment['tone_is_positive']))
+    }).catch(function (error) {
+        console.log(error);
+    })
+
+  }).catch(function (error) {
+      console.log(error);
+  })
+
+}).catch(function (error) {
+    console.log(error);
+})
+
+</script>
+
+</body>
+</html>
