@@ -156,7 +156,6 @@ Python and Javascript clients are trivial with coreapi.
 Trivial CORS issue with the browser resolved by installing an extension.
 Run it with e.g. `python -m SimpleHTTPServer 8001`.
 node.js coreapi sadly not working right now.
-TODO write one client manually.
 Added Swagger support https://django-rest-swagger.readthedocs.io/en/latest/
 See http://127.0.0.1:8000/swagger/.
 `swagger-codegen generate -i http://127.0.0.1:8000/swagger/v2/swagger.json?format=openapi -l php -o ./php/ -a "Authorization:Basic YWRtaW46YWRtaW4wMDE="`
@@ -164,3 +163,4 @@ See https://stackoverflow.com/a/42137322/384336 for authorization encoding.
 Swagger PHP client and example included for completeness.
 Turns out API schema generation is a bit buggy so clients must be manually
 patched for now, see https://github.com/marcgibbons/django-rest-swagger/issues/595
+Included also a python client developed manually with requests library.
