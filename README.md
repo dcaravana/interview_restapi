@@ -88,6 +88,10 @@ source ~/.virtualenvs/interview_restapi-python/bin/activate
 ./manage.py runserver
 ```
 
+Also you need to provide `WATSON_USERNAME` and `WATSON_PASSWORD` (as ENV variables
+  or in `local_settings.py` file) corresponding to the credentials of the IBM
+  Watson Tone service.
+
 ### Django REST Framework
 
 Just followed a couple of pages:
