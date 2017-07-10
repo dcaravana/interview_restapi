@@ -25,6 +25,7 @@ from django.contrib import admin
 from rest_framework import routers
 from rest_framework.documentation import include_docs_urls
 from rest_framework.schemas import get_schema_view
+from rest_framework_swagger.views import get_swagger_view
 from sku import views
 
 
@@ -34,7 +35,9 @@ router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'comments', views.CommentViewSet)
 
-schema_view = get_schema_view(title='SKU Comments Sentiment API')
+schema_title = 'SKU Comments Sentiment API'
+schema_view = get_schema_view(title=schema_title)
+swagger_view = get_swagger_view(title=schema_title, url='/')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -43,5 +46,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^schema/$', schema_view),
-    url(r'^docs/', include_docs_urls(title='SKU Comments Sentiment API docs'))    
+    url(r'^docs/', include_docs_urls(title=schema_title + ' docs')),
+    # url(r'^$', swagger_view),
+    url(r'^swagger/', swagger_view)
 ]

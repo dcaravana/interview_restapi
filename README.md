@@ -63,7 +63,14 @@ something to be treated as an internal because it discloses a detail of the
 underlaying tools which may make upgrades/evolution more difficult as users
 will start to rely on it.
 
-Documentation is cool TODO complete endpoints descriptions http://www.django-rest-framework.org/topics/documenting-your-api/
+Documentation is cool
+http://www.django-rest-framework.org/topics/documenting-your-api/
+TODO complete endpoints descriptions TODO regenerate clients/docs if any
+
+See:
+ - http://127.0.0.1:8000/
+ - http://127.0.0.1:8000/docs/
+ - http://127.0.0.1:8000/swagger/ (read below)
 
 Learned that ViewSet are just like Controllers in MVC so the right place
 were to implement initial non-scalable call to sentiment analysis. See 
@@ -123,7 +130,7 @@ CI: leverage github and related services? not done yet, but started with CI in
 
 Deployment: if we adopt AWS Beanstalk it's very easy from the command line 
 `eb deploy` in combination with extensions http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html
-More in general with e.g. ansible.
+More in general with e.g. ansible or AWS CodeDeploy.
 
 Monitoring: using AWS console may be enough, but using dedicated dashboard
 software can be really much more effective. For example I recently used 
@@ -149,5 +156,11 @@ Python and Javascript clients are trivial with coreapi.
 Trivial CORS issue with the browser resolved by installing an extension.
 Run it with e.g. `python -m SimpleHTTPServer 8001`.
 node.js coreapi sadly not working right now.
-TODO add Swagger support https://django-rest-swagger.readthedocs.io/en/latest/
 TODO write one client manually.
+Added Swagger support https://django-rest-swagger.readthedocs.io/en/latest/
+See http://127.0.0.1:8000/swagger/.
+`swagger-codegen generate -i http://127.0.0.1:8000/swagger/v2/swagger.json?format=openapi -l php -o ./php/ -a "Authorization:Basic YWRtaW46YWRtaW4wMDE="`
+See https://stackoverflow.com/a/42137322/384336 for authorization encoding.
+Swagger PHP client and example included for completeness.
+Turns out API schema generation is a bit buggy so clients must be manually
+patched for now, see https://github.com/marcgibbons/django-rest-swagger/issues/595

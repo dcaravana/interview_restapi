@@ -1,0 +1,4 @@
+# compensate for .gitignore at higher level
+
+!lib/
+**/vendor
