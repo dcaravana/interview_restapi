@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from models import Comment
+from sku.models import Comment
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

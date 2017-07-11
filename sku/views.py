@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from sku.serializers import UserSerializer, GroupSerializer, CommentSerializer
-from models import Comment
+from sku.models import Comment
 
 
 class UserViewSet(viewsets.ModelViewSet):

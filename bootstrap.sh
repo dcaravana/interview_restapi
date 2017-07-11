@@ -6,6 +6,7 @@ ENV=$ENV_BASE/$PROJECT-python
 
 if [[ ! -d $ENV ]]; then
     mkdir -p $ENV
+    # add -p python3 
     virtualenv --no-site-packages $ENV
     $ENV/bin/pip install --upgrade pip #else cryptography install fails
 fi
