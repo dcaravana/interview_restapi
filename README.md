@@ -189,7 +189,8 @@ They can be run with `./manage.py test`.
 
 TODO Add more tests.
 
-TODO CI: leverage github and related services?.
+While I was at it, I leveraged the awesome Travis CI services adding builds
+for python 2.x and 3.x (just fixing a minor syntax error).
 
 
 ### Scalability
