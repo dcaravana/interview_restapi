@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dcaravana/interview_restapi.svg?branch=master)](https://travis-ci.org/dcaravana/interview_restapi)
+
 # Interview Coding Test
 
 This repo contains my execution of a coding test about implementing a RESTful API.
