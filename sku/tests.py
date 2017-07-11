@@ -21,7 +21,8 @@ class CommentModelTestCase(TestCase):
         """Define the test client and other test variables."""
         self.comment_sku = uuid.uuid1()
         self.comment_content = "This is an interesting comment."
-        self.comment = Comment(sku=self.comment_sku, content=self.comment_content)
+        self.comment = Comment(
+            sku=self.comment_sku, content=self.comment_content)
 
     def test_model_can_create_a_comment(self):
         """Test the Comment model can create a comment."""
@@ -34,8 +35,6 @@ class CommentModelTestCase(TestCase):
         """Test the Comment model calls sentiment analysis service."""
         self.comment.save()
         self.assertNotEqual(self.comment.tone, '')
-
-
 
 
 class CommentViewTestCase(TestCase):

@@ -44,7 +44,8 @@ swagger_view = get_swagger_view(title=schema_title, url='/')
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^admin/', admin.site.urls),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api-auth/', include('rest_framework.urls',
+        namespace='rest_framework')),
     url(r'^schema/$', schema_view),
     url(r'^docs/', include_docs_urls(title=schema_title + ' docs')),
     # url(r'^$', swagger_view),

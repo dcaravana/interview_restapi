@@ -9,7 +9,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from watson_developer_cloud import ToneAnalyzerV3 # pylint: disable=import-error
+from watson_developer_cloud import ToneAnalyzerV3  # pylint: disable=import-error
 
 # Create your models here.
 
@@ -25,7 +25,8 @@ class Comment(models.Model):
     # TODO user
 
     # Implemented through a dynamic property and this is probably not necessary
-    # here or even bad performance-wise, but it's an example of calculated field.
+    # here or even bad performance-wise, but it's an example of calculated
+    # field.
     @property
     def tone_is_positive(self):
         """Returns whether the comment sentiment is positive."""
@@ -46,7 +47,7 @@ class Comment(models.Model):
                             joy = tone_category_tone['score']
 
             return joy >= 0.5
-        except: # pylint: disable=bare-except
+        except:  # pylint: disable=bare-except
             LOGGER.exception('Problem with tone JSON data.')
 
     class Meta(object):
