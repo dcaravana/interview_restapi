@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
+
+"""This module contains all the tests and related functions."""
+
 from __future__ import unicode_literals
 
+import uuid
 from django.test import TestCase
+from django.contrib.auth.models import User
 from rest_framework.test import APIClient
 from rest_framework import status
-from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User
 from .models import Comment
-import uuid
 
 # Create your tests here.
 
@@ -42,15 +44,15 @@ class CommentViewTestCase(TestCase):
     def setUp(self):
         """Define the test client and other test variables."""
         self.client = APIClient()
-        
+
         user = User.objects.create_superuser('admin', 'admin@none.no', 'admin')
         self.client.force_authenticate(user=user)
-        
+
         self.commment_data = {
             'sku': uuid.uuid1(),
             'content': "This is an interesting comment."
         }
-        
+
         self.response = self.client.post(
             '/comments/',
             self.commment_data,

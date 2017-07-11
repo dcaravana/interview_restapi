@@ -155,6 +155,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 # for local dev
 try:
-    from local_settings import *
+    from local_settings import * # pylint: disable=wildcard-import,unused-wildcard-import
 except ImportError:
     pass

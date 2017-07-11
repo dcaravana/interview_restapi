@@ -45,6 +45,14 @@ how much they are considered important by the python community.
 Interesting places are [The Hitchhiker’s Guide to Python](http://python-guide-pt-br.readthedocs.io/en/latest/) and
 [Sample module for Python-Guide.org](https://github.com/kennethreitz/samplemod).
 
+To enforce this, I've configured my editor (Atom) to respect more python
+conventions (like automatically removing trailing whitespaces).
+More importantly, I've installed and used python linters (`pylint` and
+`pycodestyle` seemed good options but opinions are contrasting): with their
+help, I've managed to go from 2.35/10 grade on `/sku` python files up to 6.73/10.
+A perfect score hardly makes sense in all cases with linters, but they can be
+of great help when dealing with readability.
+
 I learned also a bit more about the differences between python 2.x and 3.x and
 they boils down to a few important ones: in this case I've chosen python 2.x as
 it was immediately available, the ecosystem is a bit more complete and stable.
@@ -62,7 +70,7 @@ I have planned to write the corresponding code, things that I have not yet done
 since it goes beyond the test requirements (but I'll do it since I still want
 to learn more python.)
 
-In my mind the project should run in a completely seamless way both locally and 
+In my mind the project should run in a completely seamless way both locally and
 on the cloud (AWS) using automated cloud configuration tools.
 
 Last but not least, I had to chose if to use a framework and also select one.
@@ -72,7 +80,7 @@ this test, even if implementing a WSGI toy framework (or even a web server) is
 something I want to try in future.
 
 After a quick research, I selected Django REST Framework for a number of reasons,
-but basically because of Django (it seems to be an important skill) and 
+but basically because of Django (it seems to be an important skill) and
 of its numerous capabilities included out of the box.
 
 
@@ -103,7 +111,7 @@ Just followed a couple of pages:
 - http://www.django-rest-framework.org/tutorial/quickstart/
 
 This let me create an API in literally no time, complete with authentication and
-a load of other features. By the way I have enabled authentication which is 
+a load of other features. By the way I have enabled authentication which is
 clearly out of spec but makes things a bit more realistic, for example with the
 client libraries.
 
@@ -123,9 +131,9 @@ class Comment(models.Model):
     sku = models.CharField(max_length=100, blank=False)
     content = models.TextField()
     tone = models.TextField(blank=True)
-    
+
     ...
-``` 
+```
 
 I've added some tests as of here http://www.django-rest-framework.org/api-guide/testing/.
 
@@ -147,7 +155,7 @@ It's even interactive.
 
 See http://www.django-rest-framework.org/topics/documenting-your-api/.
 
-I've also added Swagger support but more for automatic client code generation 
+I've also added Swagger support but more for automatic client code generation
 (see below).
 
 See https://django-rest-swagger.readthedocs.io/en/latest/.
@@ -190,7 +198,7 @@ I have used ENV variables and `local_settings.py` file to set credentials
 (they can be useful in e.g. AWS Beanstalk) as a security best practice.
 
 After a bit of wandering around, I've found an ideal way to add behaviour to
-models through signals (`pre_save` in this case), which is great so there is 
+models through signals (`pre_save` in this case), which is great so there is
 no need to alter the default View and to keep the logic together with the
 corresponding model (in this case `Comment` and the call to tone analyser).
 
@@ -200,14 +208,14 @@ corresponding model (in this case `Comment` and the call to tone analyser).
 Making scalable this kind of application is about delivering it on
 the right infrastructure configured in the right way.
 
-I'm going to consider AWS but any other cloud provider 
+I'm going to consider AWS but any other cloud provider
 would probably do well.
 
 Let's consider some aspects:
 
- - Web tier: AWS Beanstalk is the simplest solution here, it's just about 
+ - Web tier: AWS Beanstalk is the simplest solution here, it's just about
     creating a new app/env with autoscaling enabled and properly configured;
-    this may require a bit of fiddling with the values the trigger the 
+    this may require a bit of fiddling with the values the trigger the
     autoscaling mechanism, together with a tool that can simulate virtual users.
  - Database tier: database can easily become the single point of failure
     for scalability, but we can start with a non-trivial RDS MySQL/Aurora instance then
@@ -220,24 +228,24 @@ Let's consider some aspects:
     using memcached) can do wonders but it depends more on the read/write ratio
     of the app: in this case, being related to comments, reads should be much more
     then writes so a cache could be very helpful here.
- - Decoupling services: since we don't have any control on the external service 
+ - Decoupling services: since we don't have any control on the external service
     that provides the tone analysis, we must assume we need to decouple the call
     to this service from the API call that actually creates a new comment instance.
     Clearly having the service call our API back would be awesome, but lacking that,
-    we can think to a traditional queuing paradigm (implemented using e.g. `rq` or 
+    we can think to a traditional queuing paradigm (implemented using e.g. `rq` or
     AWS SQS), or even better a serverless solution which is much easier to
     implement on e.g. AWS Lambda service. To complete the loop, this decoupled
     element of the architecture should call back the API when done to update
     the `tone` field of the corresponding SKU. This makes a things a bit more
     complicated when developing as the API dev environment should be reachable
     through the Internet if local. (TODO Add code)
-    
+
 In this way, every tier of the solution can scale and be tuned for scalability
-independently from each other while the API usage grows. This translates in 
-simplicity and effectiveness of a product that can grow with the business in 
+independently from each other while the API usage grows. This translates in
+simplicity and effectiveness of a product that can grow with the business in
 a lean way.
 
-Another completely different take would have been using something like 
+Another completely different take would have been using something like
 AWS API Gateway + Lamdba which can guarantee a scalability but using a
 completely different toolset.
 
@@ -258,14 +266,14 @@ Monitoring your app is always a fundamental aspect of its life since you cannot
 decide if you don't measure.
 
 Using AWS console may be enough for monitoring, but using dedicated dashboard
-software can be really much more effective. For example I recently used 
+software can be really much more effective. For example I recently used
 https://grafana.com/ just mirroring counters coming out from CloudWatch.
 
-The experience is entirely different since you can group together all the 
+The experience is entirely different since you can group together all the
 counters that matter to your app/role, enabling easy and quick discovery of issues
 and/or adding an information radiator to your organisation/team.
 
-#### Logging 
+#### Logging
 
 Django supports logging (I've added an example call) with full
 configurability https://docs.djangoproject.com/en/1.11/topics/logging/.
@@ -277,7 +285,7 @@ for anything in logs coming from a potentially high number of machines.
 
 ### Client Libraries and Examples
 
-I think that auto-generating client libraries could be a good idea because it 
+I think that auto-generating client libraries could be a good idea because it
 brings efficiency, uniformity and hopefully more quality.
 
 Anyway I've written and included also a python client developed manually with
@@ -285,7 +293,7 @@ Anyway I've written and included also a python client developed manually with
 
 TODO Add also a Java client.
 
-Clients for some languagues are immediately available thanks to 
+Clients for some languagues are immediately available thanks to
 http://www.coreapi.org/.
 
 See http://www.django-rest-framework.org/topics/api-clients/.
