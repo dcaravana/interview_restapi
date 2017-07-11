@@ -94,6 +94,7 @@ Also you need to provide `WATSON_USERNAME` and `WATSON_PASSWORD` (as ENV variabl
   or in `local_settings.py` file) corresponding to the credentials of the IBM
   Watson Tone service.
 
+
 ### Django REST Framework
 
 Just followed a couple of pages:
@@ -125,6 +126,18 @@ class Comment(models.Model):
     
     ...
 ``` 
+
+I've added some tests as of here http://www.django-rest-framework.org/api-guide/testing/.
+
+I've created very simple tests for models and API.
+
+They can be run with `./manage.py test`.
+
+TODO Add more tests.
+
+While I was at it, I leveraged the awesome Travis CI services adding builds
+for python 2.x and 3.x (just fixing a minor syntax error) that executes the
+same command.
 
 
 ### API Documentation
@@ -180,17 +193,6 @@ After a bit of wandering around, I've found an ideal way to add behaviour to
 models through signals (`pre_save` in this case), which is great so there is 
 no need to alter the default View and to keep the logic together with the
 corresponding model (in this case `Comment` and the call to tone analyser).
-
-I've added some tests as of here http://www.django-rest-framework.org/api-guide/testing/
-
-I've created very simple tests for models and API.
-
-They can be run with `./manage.py test`.
-
-TODO Add more tests.
-
-While I was at it, I leveraged the awesome Travis CI services adding builds
-for python 2.x and 3.x (just fixing a minor syntax error).
 
 
 ### Scalability
