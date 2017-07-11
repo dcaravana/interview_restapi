@@ -95,7 +95,7 @@ or in `local_settings.py` file) corresponding to the credentials of the IBM
 Watson Tone service.
 
 
-### Django REST Framework
+### Django REST Framework
 
 Just followed a couple of pages:
 
