@@ -291,7 +291,12 @@ brings efficiency, uniformity and hopefully more quality.
 Anyway I've written and included also a python client developed manually with
 `requests` library.
 
-TODO Add also a Java client.
+I've written a Java client with Retrofit http://square.github.io/retrofit/
+because I wanted to try it: at this level of complexity is not
+worth using it, but client code looks natural and simple.
+
+TODO Add a Java client implemented at a lower-level e.g. with
+http://square.github.io/okhttp/.
 
 Clients for some languagues are immediately available thanks to
 http://www.coreapi.org/.
