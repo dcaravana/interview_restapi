@@ -29,4 +29,4 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta(object):
         """All Comment attributes are currently serialized."""
         model = Comment
-        fields = ('created', 'sku', 'content', 'tone', 'tone_is_positive')
+        fields = ('id', 'created', 'sku', 'content', 'tone', 'tone_is_positive')
