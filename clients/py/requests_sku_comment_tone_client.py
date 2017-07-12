@@ -7,19 +7,21 @@ import uuid
 url = "http://127.0.0.1:8000"
 auth = HTTPBasicAuth('admin', 'admin001')
 
+
 def call_api(entity, verb='GET', params=None):
-    headers={"Content-Type": "application/json"}
-    
+    headers = {"Content-Type": "application/json"}
+
     # TODO complete with all verbs
     if verb == 'POST':
-        response = requests.post(url + entity, data=json.dumps(params), auth=auth, headers=headers)
+        response = requests.post(
+            url + entity, data=json.dumps(params), auth=auth, headers=headers)
     else:
         response = requests.get(url + entity, auth=auth, headers=headers)
     if response.ok:
         return response.json()
     else:
         response.raise_for_status()
-        
+
 
 # users list
 users = call_api('/users/')
