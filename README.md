@@ -324,3 +324,24 @@ I've included Swagger PHP client and example in this repo for completeness.
 
 Turns out API schema generation is a bit buggy so clients must be manually
 patched for now, see https://github.com/marcgibbons/django-rest-swagger/issues/595.
+
+
+## Improvements
+
+It goes without saying that my execution is more a toy right now, so there is
+a huge opportunity for improvement:
+
+- better scoping: to expand we need to gather more functional and
+non-functional requirements:
+  - better definition of the problem to be solved
+  - more context
+- more/better features: depending on previous step, we can work on:
+  - adding more entities and relations between them
+  - features for each entity
+- different approach: more general attributes related to software architecture
+and production process
+  - architecture elements and type
+  - frameworks, tools
+  - test/delivery methodologies
+  - better link team and tools
+- one obvious point is actually working on scalability
