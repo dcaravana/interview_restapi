@@ -26,14 +26,15 @@ public final class RetrofitClient {
   private Retrofit retrofit;
   private SkuCommentTone skuCommentTone;
 
-  public RetrofitClient() {
+  // TODO extend with more types of authentication
+  public RetrofitClient(String username, String password) {
 
     // quite crazy apparently, that's just for HTTP basic auth
     OkHttpClient client = new OkHttpClient.Builder()
         .addInterceptor(new Interceptor() {
             @Override public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
                 Request request = chain.request();
-                String credential = Credentials.basic("admin", "admin001");
+                String credential = Credentials.basic(username, password);
                 Request newReq = request.newBuilder()
                     .addHeader("Authorization", credential)
                     .build();

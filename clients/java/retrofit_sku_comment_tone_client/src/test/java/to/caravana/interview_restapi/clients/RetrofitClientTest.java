@@ -10,8 +10,10 @@ import to.caravana.interview_restapi.clients.*;
 
 public class RetrofitClientTest {
 
+  private String username = "admin", password = "admin001";
+
   @Test public void testCreateComment() throws IOException {
-    RetrofitClient classUnderTest = new RetrofitClient();
+    RetrofitClient classUnderTest = new RetrofitClient(username, password);
     RetrofitClient.Comment comment = new RetrofitClient.Comment(
       UUID.randomUUID().toString(),
       "This is a good message that makes me content.");
@@ -21,13 +23,13 @@ public class RetrofitClientTest {
   }
 
   @Test public void testGetComment() throws IOException {
-    RetrofitClient classUnderTest = new RetrofitClient();
+    RetrofitClient classUnderTest = new RetrofitClient(username, password);
     RetrofitClient.Comment comment = classUnderTest.getComment(1);
     assertTrue("getComment() should return comment id 1", comment.id == 1);
   }
 
   @Test public void testGetComments() throws IOException {
-    RetrofitClient classUnderTest = new RetrofitClient();
+    RetrofitClient classUnderTest = new RetrofitClient(username, password);
     List<RetrofitClient.Comment> comments = classUnderTest.getComments();
     assertTrue("getComments() size should be > 0", comments.size() > 0);
   }
