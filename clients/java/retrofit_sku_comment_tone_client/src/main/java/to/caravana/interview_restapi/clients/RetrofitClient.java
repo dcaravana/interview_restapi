@@ -86,19 +86,38 @@ public final class RetrofitClient {
     Call<Comment> createComment(@Body Comment comment);
   }
 
-  public List<Comment> getComments() throws IOException {
-    Call<List<Comment>> call = skuCommentTone.comments();
-    return call.execute().body();
+  // do not throw exceptions of underlaying implementation to avoid disclosing
+  // it to the caller; for now just returing null in case of exception to keep
+  // things simple.
+
+  public List<Comment> getComments() {
+    try {
+      Call<List<Comment>> call = skuCommentTone.comments();
+      return call.execute().body();
+    } catch (Exception e) {
+      // TODO logging
+    }
+    return null;
   }
 
-  public Comment getComment(int id) throws IOException {
-    Call<Comment> call = skuCommentTone.comment(id);
-    return call.execute().body();
+  public Comment getComment(int id) {
+    try {
+      Call<Comment> call = skuCommentTone.comment(id);
+      return call.execute().body();
+    } catch (Exception e) {
+      // TODO logging
+    }
+    return null;
   }
 
-  public Comment createComment(Comment comment) throws IOException {
-    Call<Comment> call = skuCommentTone.createComment(comment);
-    Response<Comment> response = call.execute();
-    return response.body();
+  public Comment createComment(Comment comment) {
+    try {
+      Call<Comment> call = skuCommentTone.createComment(comment);
+      Response<Comment> response = call.execute();
+      return response.body();
+    } catch (Exception e) {
+      // TODO logging
+    }
+    return null;
   }
 }
